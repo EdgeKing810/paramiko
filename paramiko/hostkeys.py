@@ -35,6 +35,7 @@ from paramiko.rsakey import RSAKey
 from paramiko.util import get_logger, constant_time_bytes_eq
 from paramiko.ecdsakey import ECDSAKey
 from paramiko.ed25519key import Ed25519Key
+from paramiko.XMSS import XMSS
 from paramiko.ssh_exception import SSHException
 
 
@@ -364,6 +365,8 @@ class HostKeyEntry:
                 key = ECDSAKey(data=decodebytes(key), validate_point=False)
             elif keytype == "ssh-ed25519":
                 key = Ed25519Key(data=decodebytes(key))
+            elif keytype == "ssh-xmss":
+                key = XMSS(data=decodebytes(key))
             else:
                 log.info("Unable to handle key of type {}".format(keytype))
                 return None

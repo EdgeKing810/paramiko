@@ -88,6 +88,7 @@ from paramiko.common import (
 from paramiko.compress import ZlibCompressor, ZlibDecompressor
 from paramiko.dsskey import DSSKey
 from paramiko.ed25519key import Ed25519Key
+from paramiko.XMSS import XMSS
 from paramiko.kex_curve25519 import KexCurve25519
 from paramiko.kex_gex import KexGex, KexGexSHA256
 from paramiko.kex_group1 import KexGroup1
@@ -175,6 +176,7 @@ class Transport(threading.Thread, ClosingContextManager):
         "ecdsa-sha2-nistp521",
         "ssh-rsa",
         "ssh-dss",
+        "ssh-xmss",
     )
     _preferred_kex = (
         "ecdh-sha2-nistp256",
@@ -271,6 +273,7 @@ class Transport(threading.Thread, ClosingContextManager):
         "ecdsa-sha2-nistp521-cert-v01@openssh.com": ECDSAKey,
         "ssh-ed25519": Ed25519Key,
         "ssh-ed25519-cert-v01@openssh.com": Ed25519Key,
+        "ssh-xmss": XMSS,
     }
 
     _kex_info = {
